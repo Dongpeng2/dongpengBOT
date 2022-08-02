@@ -1,8 +1,9 @@
 import asyncio, discord, datetime, pytz
 import random
 from discord.ext import commands
+import os
 
-token = "MTAwNDAyODc2NjEwMTcwODg4MQ.GfFSRf.9gE8axa0etMvlnd6BTX7KyNHEawEAaFnrhAPJ8"
+
 client = discord.Client()
 split_list = []
 user_cnt = 0
@@ -156,5 +157,6 @@ async def on_message(message): #사용자가 메세지 입력했을 때
         user_cnt = 0
         split_list.clear()
         await message.channel.send("리셋 완료")
-    
-client.run(token)
+        
+access_token = os.environ["BOT_TOKEN"]     
+client.run(access_token)
