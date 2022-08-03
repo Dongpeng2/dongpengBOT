@@ -27,11 +27,12 @@ async def on_message(message): #사용자가 메세지 입력했을 때
             split_list.insert(user_rand, message.author.mention)
         
     
-#    elif message.content == f"- {user.mention}": 
-#        await message.channel.send(f"{user.mention}님 추가 완료")
-#        user_rand = random.randrange(0,user_cnt+1)
-#        split_list.insert(user_rand, user.mention)
-#        user_cnt += 1
+    elif message.mentions and '-' in message.content: 
+        user_cnt += 1
+        await message.channel.send(f"{message.mentions[0].mention}님 추가 완료. 현재 총원 {user_cnt}명")
+        user_rand = random.randrange(0,user_cnt)
+        split_list.insert(user_rand, message.mentions[0].mention)
+        print(message.mentions[0].mention)
          
           
     elif message.content == "=":
