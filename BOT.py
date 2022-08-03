@@ -17,11 +17,14 @@ async def on_ready():
 @client.event
 async def on_message(message): #사용자가 메세지 입력했을 때
     if message.content == "-": # 만약 사용자가 '-' 라고 입력했을 때        
-        global user_cnt
-        user_cnt += 1
-        await message.channel.send(f"{message.author.mention}님 추가 완료. 현재 총원 {user_cnt}명")
-        user_rand = random.randrange(0,user_cnt)
-        split_list.insert(user_rand, message.author.mention)
+        if message.author.mention in split_list:
+            await message.channel.send(f"{message.author.mention}님은 이미 입력하셨습니다.")
+        else:
+            global user_cnt
+            user_cnt += 1
+            await message.channel.send(f"{message.author.mention}님 추가 완료. 현재 총원 {user_cnt}명")
+            user_rand = random.randrange(0,user_cnt)
+            split_list.insert(user_rand, message.author.mention)
         
     
 #    elif message.content == f"- {user.mention}": 
