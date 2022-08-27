@@ -12,7 +12,7 @@ user_cnt = 0
 async def on_ready():
     print(f"{client.user.name} 활성화 완료")
     print("================================")
-    await client.change_presence(status=discord.Status.online, activity=discord.Game("주사위 굴리는"))
+    await client.change_presence(status=discord.Status.online, activity=discord.Game("코딩 노예 생활"))
     
 @client.event
 async def on_message(message): #사용자가 메세지 입력했을 때
