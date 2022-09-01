@@ -3,7 +3,6 @@ import random
 from discord.ext import commands
 import os
 
-
 client = discord.Client()
 split_list = []
 user_cnt = 0
@@ -32,12 +31,9 @@ async def on_message(message): #사용자가 메세지 입력했을 때
         await message.channel.send(f"{message.mentions[0].mention}님 추가 완료. 현재 총원 {user_cnt}명")
         user_rand = random.randrange(0,user_cnt)
         split_list.insert(user_rand, message.mentions[0].mention)
-        print(message.mentions[0].mention)
          
           
     elif message.content == "=":
-        await message.channel.purge(limit=999)
-        
         embed = discord.Embed(title="정산", description= f"총원 - {user_cnt}명", timestamp=datetime.datetime.now(pytz.timezone('Asia/Seoul')), color=0x62c1cc)
         embed.set_footer(text="Bot Made by. 동펭")
         
@@ -157,10 +153,13 @@ async def on_message(message): #사용자가 메세지 입력했을 때
             await message.channel.send(embed=embed)
             
     elif '-----' in message.content:
-        await message.channel.purge(limit=999)
         user_cnt = 0
         split_list.clear()
         await message.channel.send("리셋 완료")
+        
+    elif message.content == "청소":
+        await message.channel.purge(limit=999)  
+        await message.channel.send("채팅창 청소 완료")
         
 access_token = os.environ["BOT_TOKEN"]     
 client.run(access_token)
